@@ -1,6 +1,9 @@
-﻿using System;
+﻿
+using System;
 using System.Configuration;
+using System.IO;
 using LibrarieModele;
+using LibrarieModele.Enumerari;
 using NivelStocareDate;
 
 
@@ -13,11 +16,22 @@ namespace SalaCalculatoare
 
             string numeFisier = ConfigurationManager.AppSettings["NumeFisier"];
             string numeFisier2 = ConfigurationManager.AppSettings["NumeFisier2"];
-            AdministrareCalculatoare_FisierText admincalc = new AdministrareCalculatoare_FisierText(numeFisier);
+            string locatieFisierSolutie = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+            string locatieFisierSolutie2 = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+            string caleCompletaFisier = locatieFisierSolutie + "\\" + numeFisier;
+            string caleCompletaFisier2 = locatieFisierSolutie2 + "\\" + numeFisier2;
+
+
+            AdministrareCalculatoare_FisierText admincalc = new AdministrareCalculatoare_FisierText(caleCompletaFisier);
+            AdministrareSalaFisier adminsala = new AdministrareSalaFisier(caleCompletaFisier2);
+
+
             Calculator calc1 = new Calculator();
             int indexcalc = 0;
+            Calculator[] calculatoareExistente = admincalc.GetCalculator(out indexcalc);
+            AfisareCalculatoare(calculatoareExistente, indexcalc);
+            Console.WriteLine();
 
-            AdministrareSalaFisier adminsala = new AdministrareSalaFisier(numeFisier2);
             Sala sala1 = new Sala(0);
             sala1 = CitireSalaTast();
             AfisareSala(sala1);
@@ -64,16 +78,40 @@ namespace SalaCalculatoare
             Console.WriteLine("Introdu pretul pachetului: ");
             int pret = Convert.ToInt32(Console.ReadLine());
 
-            Calculator calc = new Calculator(id, procesor, ram, gpu, pret);
-            return calc;
+            Console.WriteLine("Alege monitorul: ");
+            foreach (TipEcran tip in Enum.GetValues(typeof(TipEcran)))
+            {
+                Console.WriteLine($"{(int)tip}. {tip}");
+            }
+            int opt = Convert.ToInt32(Console.ReadLine());
+            TipEcran MonitorSelectat = (TipEcran)opt;
+
+            Accesorii accesoriiSel = 0;
+            Console.WriteLine("Selecteaza accesoriile pe care le vrei: ");
+            foreach (Accesorii acc in Enum.GetValues(typeof(Accesorii)))
+            {
+                Console.WriteLine($"{(int)acc}.{acc}");
+            }
+            string[] accesoriiInput = Console.ReadLine().Split(',');
+            foreach (string accstr in accesoriiInput)
+            {
+                if (int.TryParse(accstr, out int accVal))
+                {
+                    accesoriiSel |= (Accesorii)accVal;
+                }
+            }
+
+            return new Calculator(id, procesor, ram, gpu, pret, MonitorSelectat, accesoriiSel);
         }
         public static void AfisareCalculator(Calculator calc)
         {
-            string InfoCalc = string.Format("Calculatorul cu ID: {0}, are componentele {1}, {2}, {3}. Pretul pachetului este {4} lei.",
+            string InfoCalc = string.Format("Calculatorul cu ID: {0}, are componentele {1}, {2}, {3}. Monitorul selectat este: {4}. Accesoriile selectate sunt: {5}, Pretul pachetului este {6} lei.",
                 calc.id,
                 calc.procesor ?? "--",
                 calc.ram,
                 calc.gpu ?? "--",
+                calc.Monitor,
+                calc.accesorii,
                 calc.pret);
             Console.WriteLine(InfoCalc);
             Console.WriteLine();

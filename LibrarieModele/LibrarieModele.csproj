@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Calculator.cs" />
+    <Compile Include="Enumerari\TipEcran.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sala.cs" />
   </ItemGroup>
