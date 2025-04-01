@@ -5,11 +5,11 @@ namespace LibrarieModele
     {
         public int capacitate { get; set; }
         private const char SEPARATOR_PRINCIPAL_FISIER = ';';
-        private const int CAP = 1;
+        private const int CAP = 0;
 
-        public Sala(int capacitate)
+        public Sala(int _capacitate)
         {
-            this.capacitate = capacitate;
+            this.capacitate = _capacitate;
         }
         public Sala(string linieFisier)
         {
