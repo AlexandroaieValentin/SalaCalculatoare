@@ -1,6 +1,1 @@
-1;i5 9400f;16;gtx 1650;15;FullHD240hz;MouseOffice, TastaturaOffice, Casti_InEar
-2;i9 9900kf;32;rtx 3060;20;_2k165hz;MouseGaming, TastaturaGaming, Casti_OverEar
-3;i3 12100f;16;gtx 1080;22;FullHD360hz;MouseOffice, TastaturaOffice, Casti_InEar
-4;i5 4400;8;gt 710;10;FullHD240hz;MouseOffice, TastaturaOffice, Casti_InEar
-42;i3 12100f;32;rtx 3060;16;FullHD240hz;MouseOffice, TastaturaOffice, Casti_InEar
-2356;i9 13900kf;64;rtx 5090;50;_4k120hz;MouseGaming, TastaturaGaming, Casti_OverEar
+1;i5 9400f;16;rtx 2060;10;FullHD360hz;MouseOffice, TastaturaOffice, Casti_InEar

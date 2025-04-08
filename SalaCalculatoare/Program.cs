@@ -1,11 +1,10 @@
-﻿
-using System;
+﻿using System;
 using System.Configuration;
 using System.IO;
+using System.Collections.Generic;
 using LibrarieModele;
 using LibrarieModele.Enumerari;
 using NivelStocareDate;
-
 
 namespace SalaCalculatoare
 {
@@ -13,58 +12,51 @@ namespace SalaCalculatoare
     {
         static void Main()
         {
-
             string numeFisier = ConfigurationManager.AppSettings["NumeFisier"];
             string numeFisier2 = ConfigurationManager.AppSettings["NumeFisier2"];
-            string locatieFisierSolutie = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName;
-            string locatieFisierSolutie2 = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+            string locatieFisierSolutie = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+            string locatieFisierSolutie2 = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
             string caleCompletaFisier = locatieFisierSolutie + "\\" + numeFisier;
             string caleCompletaFisier2 = locatieFisierSolutie2 + "\\" + numeFisier2;
-
 
             AdministrareCalculatoare_FisierText admincalc = new AdministrareCalculatoare_FisierText(caleCompletaFisier);
             AdministrareSalaFisier adminsala = new AdministrareSalaFisier(caleCompletaFisier2);
 
-
-            Calculator calc1 = new Calculator();
-            int indexcalc = 0;
-            Calculator[] calculatoareExistente = admincalc.GetCalculator(out indexcalc);
-            AfisareCalculatoare(calculatoareExistente, indexcalc);
+            List<Calculator> calculatoareExistente = admincalc.GetCalculatoare();
+            AfisareCalculatoare(calculatoareExistente);
             Console.WriteLine();
 
-            Sala sala1 = new Sala(0);
-            sala1 = CitireSalaTast();
+            Sala sala1 = CitireSalaTast();
             AfisareSala(sala1);
             adminsala.LocuriCamera(sala1);
             Console.WriteLine();
 
             for (int i = 0; i < 2; i++)
             {
-                calc1 = CitireCalcTastatura();
-                AfisareCalculator(calc1);
-                admincalc.AddCalculator(calc1);
-
+                Calculator calc = CitireCalcTastatura();
+                AfisareCalculator(calc);
+                admincalc.AddCalculator(calc);
             }
-            Calculator[] calc = admincalc.GetCalculator(out indexcalc);
-            AfisareCalculatoare(calc, indexcalc);
+            List<Calculator> calcList = admincalc.GetCalculatoare();
+            AfisareCalculatoare(calcList);
             Console.WriteLine();
-
 
             Console.WriteLine("Introduceti pretul pachetului cautat: ");
             int pretCautat = Convert.ToInt32(Console.ReadLine());
 
-            Calculator[] rezultate = admincalc.GetPret(pretCautat, out int nrRezultate);
+            List<Calculator> rezultate = admincalc.GetCalculatoareByPret(pretCautat);
 
-            if (nrRezultate > 0)
+            if (rezultate.Count > 0)
             {
-                Console.WriteLine($"Exista {nrRezultate} pachet cu pretul {pretCautat} lei: ");
-                AfisareCalculatoare(rezultate, nrRezultate);
+                Console.WriteLine($"Exista {rezultate.Count} pachet cu pretul {pretCautat} lei: ");
+                AfisareCalculatoare(rezultate);
             }
             else
             {
                 Console.WriteLine("Nu exista niciun pachet cu pretul acesta.");
             }
         }
+
         public static Calculator CitireCalcTastatura()
         {
             Console.WriteLine("Introdu ID-ul calculatorului: ");
@@ -90,7 +82,7 @@ namespace SalaCalculatoare
             Console.WriteLine("Selecteaza accesoriile pe care le vrei: ");
             foreach (Accesorii acc in Enum.GetValues(typeof(Accesorii)))
             {
-                Console.WriteLine($"{(int)acc}.{acc}");
+                Console.WriteLine($"{(int)acc}. {acc}");
             }
             string[] accesoriiInput = Console.ReadLine().Split(',');
             foreach (string accstr in accesoriiInput)
@@ -103,9 +95,11 @@ namespace SalaCalculatoare
 
             return new Calculator(id, procesor, ram, gpu, pret, MonitorSelectat, accesoriiSel);
         }
+
         public static void AfisareCalculator(Calculator calc)
         {
-            string InfoCalc = string.Format("Calculatorul cu ID: {0}, are componentele {1}, {2}, {3}. Monitorul selectat este: {4}. Accesoriile selectate sunt: {5}, Pretul pachetului este {6} lei.",
+            string InfoCalc = string.Format(
+                "Calculatorul cu ID: {0}, are componentele {1}, {2}, {3}. Monitorul selectat este: {4}. Accesoriile selectate sunt: {5}, Pretul pachetului este {6} lei.",
                 calc.id,
                 calc.procesor ?? "--",
                 calc.ram,
@@ -116,15 +110,17 @@ namespace SalaCalculatoare
             Console.WriteLine(InfoCalc);
             Console.WriteLine();
         }
-        public static void AfisareCalculatoare(Calculator[] calc1, int indexcalc)
+
+        public static void AfisareCalculatoare(List<Calculator> calculatoare)
         {
             Console.WriteLine("Calculatoarele sunt: ");
-            for (int contor = 0; contor < indexcalc; contor++)
+            int contor = 1;
+            foreach (Calculator calc in calculatoare)
             {
-                string InfoCalc = calc1[contor].Info();
-                Console.WriteLine($"Calculator {contor + 1}: {InfoCalc}");
+                Console.WriteLine($"Calculator {contor++}: {calc.Info()}");
             }
         }
+
         public static Sala CitireSalaTast()
         {
             Console.WriteLine("Capacitatea maxima a salii este: ");
@@ -132,10 +128,10 @@ namespace SalaCalculatoare
             Sala sala1 = new Sala(capacitate);
             return sala1;
         }
+
         public static void AfisareSala(Sala sala1)
         {
-            string InfoSala = string.Format("Sala are capacitatea maxima: {0}. ",
-                sala1.capacitate);
+            string InfoSala = string.Format("Sala are capacitatea maxima: {0}.", sala1.capacitate);
             Console.WriteLine(InfoSala);
         }
     }
