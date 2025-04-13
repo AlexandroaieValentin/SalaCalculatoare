@@ -78,7 +78,7 @@ namespace LibrarieModele
 
         }
 
-        public string Info()
+        public override string ToString()
         {
             return $"ID: {id}, Procesor: {procesor}, RAM: {ram} GB, GPU: {gpu}, Monitor: {Monitor}, Accesorii: {accesorii}, Pret pachet: {pret} lei";
         }

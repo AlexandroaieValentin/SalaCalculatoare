@@ -1,5 +1,6 @@
 ﻿using LibrarieModele;
 using LibrarieModele.Enumerari;
+using MetroFramework.Forms;
 using NivelStocareDate;
 using System;
 using System.Collections.Generic;
@@ -13,43 +14,48 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MetroFramework.Controls;
 
 namespace InterfataUtilizator_WindowsForms
 {
-    public partial class Form1 : Form
+    public partial class Form1 : MetroForm
     {
         AdministrareCalculatoare_FisierText admincalc;
         AdministrareSalaFisier adminsala;
 
-        private Label lblUltimaSalaAfisata;
-        private Label lblid;
-        private Label lblprocesor;
-        private Label lblram;
-        private Label lblgpu;
-        private Label lblpret;
-        private Label lblmonitor;
-        private Label lblaccesorii;
-        private Label lblsala;
+        private MetroLabel lblUltimaSalaAfisata;
+        private MetroLabel lblid;
+        private MetroLabel lblprocesor;
+        private MetroLabel lblram;
+        private MetroLabel lblgpu;
+        private MetroLabel lblpret;
+        private MetroLabel lblmonitor;
+        private MetroLabel lblaccesorii;
+        private MetroLabel lblsala;
+        private MetroLabel lblcautare;
 
-        private TextBox txtid;
-        private TextBox txtprocesor;
-        private TextBox txtram;
-        private TextBox txtgpu;
-        private TextBox txtpret;
-        private TextBox txtmonitor;
-        private TextBox txtaccesorii;
-        private TextBox txtsala;
+        private MetroTextBox txtid;
+        private MetroTextBox txtprocesor;
+        private MetroTextBox txtram;
+        private MetroTextBox txtgpu;
+        private MetroTextBox txtpret;
+        private MetroTextBox txtmonitor;
+        private MetroTextBox txtaccesorii;
+        private MetroTextBox txtsala;
+        private MetroTextBox txtcautare;
 
-        private Button btnadd;
-        private Button btnrefresh;
+        private MetroButton btnadd;
+        private MetroButton btnrefresh;
+        private MetroButton btncautare;
 
-        private List<Label> lblsid;
-        private List<Label> lblsprocesor;
-        private List<Label> lblsram;
-        private List<Label> lblsgpu;
-        private List<Label> lblspret;
-        private List<Label> lblsmonitor;
-        private List<Label> lblsaccesorii;
+        private List<MetroLabel> lblsid;
+        private List<MetroLabel> lblsprocesor;
+        private List<MetroLabel> lblsram;
+        private List<MetroLabel> lblsgpu;
+        private List<MetroLabel> lblspret;
+        private List<MetroLabel> lblsmonitor;
+        private List<MetroLabel> lblsaccesorii;
+        private List<MetroLabel> lblscautare;
 
         private const int LATIME_CONTROL = 100;
         private const int DIMENSIUNE_PAS_Y = 30;
@@ -64,14 +70,15 @@ namespace InterfataUtilizator_WindowsForms
         private const int MAX_CAPACITATE_SALA = 50;
         private const int MIN_CAPACITATE_SALA = 1;
 
-        private Label lblErrorId;
-        private Label lblErrorProcesor;
-        private Label lblErrorRam;
-        private Label lblErrorGpu;
-        private Label lblErrorPret;
-        private Label lblErrorMonitor;
-        private Label lblErrorAccesorii;
-        private Label lblErrorSala;
+        private MetroLabel lblErrorId;
+        private MetroLabel lblErrorProcesor;
+        private MetroLabel lblErrorRam;
+        private MetroLabel lblErrorGpu;
+        private MetroLabel lblErrorPret;
+        private MetroLabel lblErrorMonitor;
+        private MetroLabel lblErrorAccesorii;
+        private MetroLabel lblErrorSala;
+        private MetroLabel lblErrorCaut;
 
 
 
@@ -89,7 +96,7 @@ namespace InterfataUtilizator_WindowsForms
             string caleCompletaFisier2 = locatieFisierSolutie2 + "\\" + numeFisier2;
             adminsala = new AdministrareSalaFisier(caleCompletaFisier2);
 
-            this.Size = new Size(1500, 400);
+            this.Size = new Size(1500, 800);
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point(100, 100);
             this.Font = new Font("Consolas", 9, FontStyle.Bold);
@@ -98,185 +105,224 @@ namespace InterfataUtilizator_WindowsForms
             this.Text = "Informatii sala";
 
 
-            lblsala = new Label();
+            lblsala = new MetroLabel();
             lblsala.Width = LATIME_CONTROL;
             lblsala.Text = "Locuri sala";
             lblsala.Left = DIMENSIUNE_PAS_X;
+            lblsala.Top = 3 * DIMENSIUNE_PAS_Y;
             lblsala.ForeColor = Color.White;
             this.Controls.Add(lblsala);
 
-            lblid = new Label();
+            lblcautare = new MetroLabel();
+            lblcautare.Width = LATIME_CONTROL;
+            lblcautare.AutoSize = true;
+            lblcautare.Text = "Cautare dupa ID";
+            lblcautare.Top = 20 * DIMENSIUNE_PAS_Y;
+            lblcautare.Left = DIMENSIUNE_PAS_X;
+            lblcautare.ForeColor = Color.White;
+            this.Controls.Add(lblcautare);
+
+            lblid = new MetroLabel();
             lblid.Width = LATIME_CONTROL;
             lblid.Text = "ID";
+            lblid.Top = 3 * DIMENSIUNE_PAS_Y;
             lblid.Left = 2 * DIMENSIUNE_PAS_X;
             lblid.ForeColor = Color.White;
             this.Controls.Add(lblid);
 
-            lblprocesor = new Label();
+            lblprocesor = new MetroLabel();
             lblprocesor.Width = LATIME_CONTROL;
             lblprocesor.Text = "Procesor";
+            lblprocesor.Top = 3 * DIMENSIUNE_PAS_Y;
             lblprocesor.Left = 3 * DIMENSIUNE_PAS_X;
             lblprocesor.ForeColor = Color.White;
             this.Controls.Add(lblprocesor);
 
-            lblram = new Label();
+            lblram = new MetroLabel();
             lblram.Width = LATIME_CONTROL;
             lblram.Text = "RAM";
+            lblram.Top = 3 * DIMENSIUNE_PAS_Y;
             lblram.Left = 4 * DIMENSIUNE_PAS_X;
             lblram.ForeColor = Color.White;
             this.Controls.Add(lblram);
 
-            lblgpu = new Label();
+            lblgpu = new MetroLabel();
             lblgpu.Width = LATIME_CONTROL;
             lblgpu.Text = "GPU";
+            lblgpu.Top = 3 * DIMENSIUNE_PAS_Y;
             lblgpu.Left = 5 * DIMENSIUNE_PAS_X;
             lblgpu.ForeColor = Color.White;
             this.Controls.Add(lblgpu);
 
-            lblpret = new Label();
+            lblpret = new MetroLabel();
             lblpret.Width = LATIME_CONTROL;
             lblpret.Text = "Pret";
+            lblpret.Top = 3 * DIMENSIUNE_PAS_Y;
             lblpret.Left = 6 * DIMENSIUNE_PAS_X;
             lblpret.ForeColor = Color.White;
             this.Controls.Add(lblpret);
 
-            lblmonitor = new Label();
+            lblmonitor = new MetroLabel();
             lblmonitor.Width = LATIME_CONTROL;
+            lblmonitor.Top = 3 * DIMENSIUNE_PAS_Y;
             lblmonitor.Text = "Monitor";
             lblmonitor.Left = 7 * DIMENSIUNE_PAS_X;
             lblmonitor.ForeColor = Color.White;
             this.Controls.Add(lblmonitor);
 
-            lblaccesorii = new Label();
+            lblaccesorii = new MetroLabel();
             lblaccesorii.Width = LATIME_CONTROL;
+            lblaccesorii.Top = 3 * DIMENSIUNE_PAS_Y;
             lblaccesorii.Text = "Accesorii";
             lblaccesorii.Left = 8 * DIMENSIUNE_PAS_X;
             lblaccesorii.ForeColor = Color.White;
             this.Controls.Add(lblaccesorii);
 
 
-            txtid = new TextBox();
-            txtid.Top = 5 * DIMENSIUNE_PAS_Y;
+            txtid = new MetroTextBox();
+            txtid.Top = 13 * DIMENSIUNE_PAS_Y;
             txtid.Width = LATIME_CONTROL;
             txtid.Left = 2 * DIMENSIUNE_PAS_X;
             this.Controls.Add(txtid);
 
-            txtprocesor = new TextBox();
-            txtprocesor.Top = 5 * DIMENSIUNE_PAS_Y;
+            txtcautare = new MetroTextBox();
+            txtcautare.Top = 20 * DIMENSIUNE_PAS_Y;
+            txtcautare.Width = LATIME_CONTROL;
+            txtcautare.Left = 2 * DIMENSIUNE_PAS_X;
+            this.Controls.Add(txtcautare);
+
+            txtprocesor = new MetroTextBox();
+            txtprocesor.Top = 13 * DIMENSIUNE_PAS_Y;
             txtprocesor.Width = LATIME_CONTROL;
             txtprocesor.Left = 3 * DIMENSIUNE_PAS_X;
             this.Controls.Add(txtprocesor);
 
-            txtram = new TextBox();
-            txtram.Top = 5 * DIMENSIUNE_PAS_Y;
+            txtram = new MetroTextBox();
+            txtram.Top = 13 * DIMENSIUNE_PAS_Y;
             txtram.Width = LATIME_CONTROL;
             txtram.Left = 4 * DIMENSIUNE_PAS_X;
             this.Controls.Add(txtram);
 
-            txtgpu = new TextBox();
-            txtgpu.Top = 5 * DIMENSIUNE_PAS_Y;
+            txtgpu = new MetroTextBox();
+            txtgpu.Top = 13 * DIMENSIUNE_PAS_Y;
             txtgpu.Width = LATIME_CONTROL;
             txtgpu.Left = 5 * DIMENSIUNE_PAS_X;
             this.Controls.Add(txtgpu);
-            
-            txtpret = new TextBox();
-            txtpret.Top = 5 * DIMENSIUNE_PAS_Y;
+
+            txtpret = new MetroTextBox();
+            txtpret.Top = 13 * DIMENSIUNE_PAS_Y;
             txtpret.Width = LATIME_CONTROL;
             txtpret.Left = 6 * DIMENSIUNE_PAS_X;
             this.Controls.Add(txtpret);
 
-            txtmonitor = new TextBox();
-            txtmonitor.Top = 5 * DIMENSIUNE_PAS_Y;
+            txtmonitor = new MetroTextBox();
+            txtmonitor.Top = 13 * DIMENSIUNE_PAS_Y;
             txtmonitor.Width = LATIME_CONTROL;
             txtmonitor.Left = 7 * DIMENSIUNE_PAS_X;
             this.Controls.Add(txtmonitor);
-            
-            txtaccesorii = new TextBox();
-            txtaccesorii.Top = 5 * DIMENSIUNE_PAS_Y;
+
+            txtaccesorii = new MetroTextBox();
+            txtaccesorii.Top = 13 * DIMENSIUNE_PAS_Y;
             txtaccesorii.Width = LATIME_CONTROL;
             txtaccesorii.Left = 8 * DIMENSIUNE_PAS_X;
             this.Controls.Add(txtaccesorii);
-            
-            txtsala = new TextBox();
-            txtsala.Top = 5 * DIMENSIUNE_PAS_Y;
+
+            txtsala = new MetroTextBox();
+            txtsala.Top = 13 * DIMENSIUNE_PAS_Y;
             txtsala.Width = LATIME_CONTROL;
             txtsala.Left = DIMENSIUNE_PAS_X;
             this.Controls.Add(txtsala);
 
-            
-            
-            btnadd = new Button();
+
+
+            btnadd = new MetroButton();
             btnadd.Text = "Adauga calculator";
             btnadd.Width = LATIME_CONTROL;
-            btnadd.Location = new Point(100, 250);
+            btnadd.AutoSize = true;
+            btnadd.Location = new Point(150, 500);
             btnadd.Click += btnclick;
             this.Controls.Add(btnadd);
 
-            btnrefresh = new Button();
+            btnrefresh = new MetroButton();
             btnrefresh.Text = "Refresh";
             btnrefresh.Width = LATIME_CONTROL;
-            btnrefresh.Location = new Point(100, 300);
+            btnrefresh.AutoSize = true;
+            btnrefresh.Location = new Point(150, 550);
             btnrefresh.Click += butonrefresh;
             this.Controls.Add(btnrefresh);
 
-            
-            
-            
-            lblErrorId = new Label();
+            btncautare = new MetroButton();
+            btncautare.Text = "Cauta calculator";
+            btncautare.Width = LATIME_CONTROL;
+            btncautare.Location = new Point(450, 600);
+            btncautare.Click += btncautare_Click;
+            this.Controls.Add(btncautare);
+
+
+
+            lblErrorId = new MetroLabel();
             lblErrorId.AutoSize = true;
             lblErrorId.ForeColor = Color.Red;
             lblErrorId.Left = txtid.Left;
             lblErrorId.Top = txtid.Bottom + 5;
             this.Controls.Add(lblErrorId);
 
-            lblErrorProcesor = new Label();
+            lblErrorProcesor = new MetroLabel();
             lblErrorProcesor.ForeColor = Color.Red;
             lblErrorProcesor.Left = txtprocesor.Left;
             lblErrorProcesor.Top = txtprocesor.Bottom + 5;
             lblErrorProcesor.AutoSize = true;
             this.Controls.Add(lblErrorProcesor);
 
-            lblErrorRam = new Label();
+            lblErrorRam = new MetroLabel();
             lblErrorRam.ForeColor = Color.Red;
             lblErrorRam.Left = txtram.Left;
             lblErrorRam.Top = txtram.Bottom + 5;
             lblErrorRam.AutoSize = true;
             this.Controls.Add(lblErrorRam);
 
-            lblErrorGpu = new Label();
+            lblErrorGpu = new MetroLabel();
             lblErrorGpu.ForeColor = Color.Red;
             lblErrorGpu.Left = txtgpu.Left;
             lblErrorGpu.Top = txtgpu.Bottom + 5;
             lblErrorGpu.AutoSize = true;
             this.Controls.Add(lblErrorGpu);
 
-            lblErrorPret = new Label();
+            lblErrorPret = new MetroLabel();
             lblErrorPret.ForeColor = Color.Red;
             lblErrorPret.Left = txtpret.Left;
             lblErrorPret.Top = txtpret.Bottom + 5;
             lblErrorPret.AutoSize = true;
             this.Controls.Add(lblErrorPret);
-            
-            lblErrorMonitor = new Label();
+
+            lblErrorMonitor = new MetroLabel();
             lblErrorMonitor.ForeColor = Color.Red;
             lblErrorMonitor.Left = txtmonitor.Left;
             lblErrorMonitor.Top = txtmonitor.Bottom + 5;
             lblErrorMonitor.AutoSize = true;
             this.Controls.Add(lblErrorMonitor);
-            
-            lblErrorAccesorii = new Label();
+
+            lblErrorAccesorii = new MetroLabel();
             lblErrorAccesorii.ForeColor = Color.Red;
             lblErrorAccesorii.Left = txtaccesorii.Left;
             lblErrorAccesorii.Top = txtaccesorii.Bottom + 5;
             lblErrorAccesorii.AutoSize = true;
             this.Controls.Add(lblErrorAccesorii);
-            
-            lblErrorSala = new Label();
+
+            lblErrorSala = new MetroLabel();
             lblErrorSala.ForeColor = Color.Red;
             lblErrorSala.Left = txtsala.Left;
             lblErrorSala.Top = txtsala.Bottom + 5;
             lblErrorSala.AutoSize = true;
             this.Controls.Add(lblErrorSala);
+
+            lblErrorCaut = new MetroLabel();
+            lblErrorCaut.ForeColor = Color.Red;
+            lblErrorCaut.Left = txtcautare.Left;
+            lblErrorCaut.Top = txtcautare.Bottom + 5;
+            lblErrorCaut.AutoSize = true;
+            this.Controls.Add(lblErrorCaut);
+
 
 
         }
@@ -352,6 +398,58 @@ namespace InterfataUtilizator_WindowsForms
 
         }
 
+        private void btncautare_Click(object sender, EventArgs e)
+        {
+            ResetareMesajeEroare();
+            AfisareCalculator();
+            AfisareSala();
+
+            if (lblscautare != null)
+            {
+                foreach (var lbl in lblscautare)
+                {
+                    this.Controls.Remove(lbl);
+                    lbl.Dispose();
+                }
+                lblscautare.Clear();
+            }
+
+            if (string.IsNullOrWhiteSpace(txtcautare.Text))
+            {
+                lblErrorCaut.Text = "Cautare invalida";
+                return;
+            }
+
+            if (!int.TryParse(txtcautare.Text, out int idCautat))
+            {
+                lblErrorCaut.Text = "ID-ul trebuie sa fie un numar";
+                return;
+            }
+
+            List<Calculator> calculatoare = admincalc.GetCalculatoare();
+            List<Calculator> calculatoareGasite = calculatoare.Where(c => c.id == idCautat).ToList();
+
+            if (calculatoareGasite.Count > 0)
+            {
+                lblscautare = new List<MetroLabel>();
+                foreach (Calculator calc in calculatoareGasite)
+                {
+                    MetroLabel lblCautat = new MetroLabel();
+                    lblCautat.Width = LATIME_CONTROL;
+                    lblCautat.Text = calc.ToString();
+                    lblCautat.Left = 2 * DIMENSIUNE_PAS_X;
+                    lblCautat.Top = 22 * DIMENSIUNE_PAS_Y;
+                    lblCautat.ForeColor = Color.White;
+                    lblCautat.AutoSize = true;
+                    this.Controls.Add(lblCautat);
+                    lblscautare.Add(lblCautat);
+                }
+            }
+            else
+            {
+                lblErrorCaut.Text = "Calculatorul nu a fost gasit";
+            }
+        }
         private void butonrefresh(object sender, EventArgs e)
         {
             AfisareCalculator();
@@ -370,11 +468,11 @@ namespace InterfataUtilizator_WindowsForms
             if (sali.Count > 0)
             {
                 Sala ultimaSala = sali[sali.Count - 1];
-                lblUltimaSalaAfisata = new Label();
+                lblUltimaSalaAfisata = new MetroLabel();
                 lblUltimaSalaAfisata.Width = LATIME_CONTROL;
                 lblUltimaSalaAfisata.Text = ultimaSala.capacitate.ToString();
                 lblUltimaSalaAfisata.Left = DIMENSIUNE_PAS_X;
-                lblUltimaSalaAfisata.Top = DIMENSIUNE_PAS_Y;
+                lblUltimaSalaAfisata.Top = 4 * DIMENSIUNE_PAS_Y;
                 lblUltimaSalaAfisata.ForeColor = Color.White;
                 this.Controls.Add(lblUltimaSalaAfisata);
             }
@@ -386,83 +484,83 @@ namespace InterfataUtilizator_WindowsForms
             List<Calculator> calculatoare = admincalc.GetCalculatoare();
 
 
-            lblsid = new List<Label>();
-            lblsprocesor = new List<Label>();
-            lblsram = new List<Label>();
-            lblsgpu = new List<Label>();
-            lblspret = new List<Label>();
-            lblsmonitor = new List<Label>();
-            lblsaccesorii = new List<Label>();
+            lblsid = new List<MetroLabel>();
+            lblsprocesor = new List<MetroLabel>();
+            lblsram = new List<MetroLabel>();
+            lblsgpu = new List<MetroLabel>();
+            lblspret = new List<MetroLabel>();
+            lblsmonitor = new List<MetroLabel>();
+            lblsaccesorii = new List<MetroLabel>();
 
             int index = 0;
             foreach (Calculator calc in calculatoare)
             {
 
-                Label lblIdCalc = new Label();
+                MetroLabel lblIdCalc = new MetroLabel();
                 lblIdCalc.Width = LATIME_CONTROL;
                 lblIdCalc.Text = calc.id.ToString();
                 lblIdCalc.Left = 2 * DIMENSIUNE_PAS_X;
-                lblIdCalc.Top = (index + 1) * DIMENSIUNE_PAS_Y;
+                lblIdCalc.Top = (index + 4) * DIMENSIUNE_PAS_Y;
                 lblIdCalc.ForeColor = Color.White;
                 this.Controls.Add(lblIdCalc);
                 lblsid.Add(lblIdCalc);
 
 
-                Label lblProc = new Label();
+                MetroLabel lblProc = new MetroLabel();
                 lblProc.Width = LATIME_CONTROL;
                 lblProc.Text = calc.procesor;
                 lblProc.Left = 3 * DIMENSIUNE_PAS_X;
-                lblProc.Top = (index + 1) * DIMENSIUNE_PAS_Y;
+                lblProc.Top = (index + 4) * DIMENSIUNE_PAS_Y;
                 lblProc.ForeColor = Color.White;
                 this.Controls.Add(lblProc);
                 lblsprocesor.Add(lblProc);
 
 
-                Label lblRam = new Label();
+                MetroLabel lblRam = new MetroLabel();
                 lblRam.Width = LATIME_CONTROL;
                 lblRam.Text = calc.ram.ToString();
                 lblRam.Left = 4 * DIMENSIUNE_PAS_X;
-                lblRam.Top = (index + 1) * DIMENSIUNE_PAS_Y;
+                lblRam.Top = (index + 4) * DIMENSIUNE_PAS_Y;
                 lblRam.ForeColor = Color.White;
                 this.Controls.Add(lblRam);
                 lblsram.Add(lblRam);
 
 
-                Label lblGpu = new Label();
+                MetroLabel lblGpu = new MetroLabel();
                 lblGpu.Width = LATIME_CONTROL;
                 lblGpu.Text = calc.gpu;
                 lblGpu.Left = 5 * DIMENSIUNE_PAS_X;
-                lblGpu.Top = (index + 1) * DIMENSIUNE_PAS_Y;
+                lblGpu.Top = (index + 4) * DIMENSIUNE_PAS_Y;
                 lblGpu.ForeColor = Color.White;
                 this.Controls.Add(lblGpu);
                 lblsgpu.Add(lblGpu);
 
 
-                Label lblPret = new Label();
+                MetroLabel lblPret = new MetroLabel();
                 lblPret.Width = LATIME_CONTROL;
                 lblPret.Text = calc.pret.ToString();
                 lblPret.Left = 6 * DIMENSIUNE_PAS_X;
-                lblPret.Top = (index + 1) * DIMENSIUNE_PAS_Y;
+                lblPret.Top = (index + 4) * DIMENSIUNE_PAS_Y;
                 lblPret.ForeColor = Color.White;
                 this.Controls.Add(lblPret);
                 lblspret.Add(lblPret);
 
 
-                Label lblMonitor = new Label();
+                MetroLabel lblMonitor = new MetroLabel();
                 lblMonitor.Width = LATIME_CONTROL;
                 lblMonitor.Text = calc.Monitor.ToString();
                 lblMonitor.Left = 7 * DIMENSIUNE_PAS_X;
-                lblMonitor.Top = (index + 1) * DIMENSIUNE_PAS_Y;
+                lblMonitor.Top = (index + 4) * DIMENSIUNE_PAS_Y;
                 lblMonitor.ForeColor = Color.White;
                 this.Controls.Add(lblMonitor);
                 lblsmonitor.Add(lblMonitor);
 
 
-                Label lblAccesorii = new Label();
+                MetroLabel lblAccesorii = new MetroLabel();
                 lblAccesorii.AutoSize = true;
                 lblAccesorii.Text = calc.accesorii.ToString();
                 lblAccesorii.Left = 8 * DIMENSIUNE_PAS_X;
-                lblAccesorii.Top = (index + 1) * DIMENSIUNE_PAS_Y;
+                lblAccesorii.Top = (index + 4) * DIMENSIUNE_PAS_Y;
                 lblAccesorii.ForeColor = Color.White;
                 this.Controls.Add(lblAccesorii);
                 lblsaccesorii.Add(lblAccesorii);
@@ -480,6 +578,7 @@ namespace InterfataUtilizator_WindowsForms
             lblErrorMonitor.Text = "";
             lblErrorAccesorii.Text = "";
             lblErrorSala.Text = "";
+            lblErrorCaut.Text = "";
         }
 
 

@@ -1,1 +1,1 @@
-1;i5 9400f;16;rtx 2060;10;FullHD360hz;MouseOffice, TastaturaOffice, Casti_InEar
+1;i5 9400f;16;gtx 1650;10;FullHD360hz;MouseOffice, TastaturaOffice, Casti_InEar
