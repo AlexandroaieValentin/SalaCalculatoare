@@ -1,0 +1,6 @@
+E:\piu\SalaCalculatoare-master\LibrarieModele\bin\Debug\LibrarieModele.dll
+E:\piu\SalaCalculatoare-master\LibrarieModele\bin\Debug\LibrarieModele.pdb
+E:\piu\SalaCalculatoare-master\LibrarieModele\obj\Debug\LibrarieModele.csproj.AssemblyReference.cache
+E:\piu\SalaCalculatoare-master\LibrarieModele\obj\Debug\LibrarieModele.csproj.CoreCompileInputs.cache
+E:\piu\SalaCalculatoare-master\LibrarieModele\obj\Debug\LibrarieModele.dll
+E:\piu\SalaCalculatoare-master\LibrarieModele\obj\Debug\LibrarieModele.pdb

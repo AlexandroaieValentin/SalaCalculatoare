@@ -1,0 +1,3 @@
+1;asdasdsa;16;asdgtasgt;20;FullHD360hz;MouseGaming, TastaturaOffice, Casti_OverEar
+2;asdgsadg;16;asdgsda;54;FullHD240hz;MouseOffice, TastaturaOffice, Casti_InEar
+6;drg;32;eryd;5;FullHD360hz;MouseOffice, TastaturaOffice, Casti_InEar

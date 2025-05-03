@@ -1,0 +1,9 @@
+E:\piu\SalaCalculatoare-master\NivelStocareDate\bin\Debug\NivelStocareDate.dll
+E:\piu\SalaCalculatoare-master\NivelStocareDate\bin\Debug\NivelStocareDate.pdb
+E:\piu\SalaCalculatoare-master\NivelStocareDate\bin\Debug\LibrarieModele.dll
+E:\piu\SalaCalculatoare-master\NivelStocareDate\bin\Debug\LibrarieModele.pdb
+E:\piu\SalaCalculatoare-master\NivelStocareDate\obj\Debug\NivelStocareDate.csproj.AssemblyReference.cache
+E:\piu\SalaCalculatoare-master\NivelStocareDate\obj\Debug\NivelStocareDate.csproj.CoreCompileInputs.cache
+E:\piu\SalaCalculatoare-master\NivelStocareDate\obj\Debug\NivelSto.ECC26E05.Up2Date
+E:\piu\SalaCalculatoare-master\NivelStocareDate\obj\Debug\NivelStocareDate.dll
+E:\piu\SalaCalculatoare-master\NivelStocareDate\obj\Debug\NivelStocareDate.pdb
