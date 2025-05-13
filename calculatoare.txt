@@ -1,1 +1,5 @@
-1;i5 9400f;16;gtx 1650;10;FullHD360hz;MouseOffice, TastaturaOffice, Casti_InEar
+1;asdsad;15;sdasd;15;FullHD600hz;TastaturaOffice, TastaturaGaming, Casti_InEar;False
+2;asdasd;16;asdasd;6;FullHD360hz;TastaturaOffice, Casti_InEar, Casti_OverEar;True
+3;hhjhh;34;sdf;56;_4k120hz;MouseOffice, TastaturaOffice, Casti_InEar;True
+5;asfsag;6;asdasd;15;FullHD360hz;TastaturaOffice, TastaturaGaming, Casti_InEar;True
+7;asd;16;asdg;6;_2k165hz;MouseOffice, MouseGaming, TastaturaOffice;True
